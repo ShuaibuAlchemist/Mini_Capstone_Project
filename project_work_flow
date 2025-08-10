@@ -1,0 +1,125 @@
+**Project Workflow**
+
+1. Project Planning and Scope
+Objective: Determine if whale transactions (>$100K) correlate with or precede price movements of a selected token (e.g., ETH, BTC, or a DeFi token).
+
+Key Questions:
+
+Do spikes in whale activity align with or predict price volatility?
+
+Is there a pattern between transfer volume and price movement direction?
+
+2. Data Source Integration
+A. Price Data — Coingecko API
+Goal: Collect hourly or daily historical price data (Open, High, Low, Close, Volume).
+
+Steps:
+
+Use https://api.coingecko.com/api/v3/coins/{id}/market_chart
+
+Params: vs_currency (e.g., USD), days, interval (hourly/daily)
+
+Format as a time-indexed DataFrame
+
+B. Whale Activity — Dune Sim API
+Goal: Extract on-chain large transfers (> $100K).
+
+Steps:
+
+Query Dune using a simulation API or pre-built dashboards with large transfer filters.
+
+Key fields: timestamp, value (in USD or token), sender, receiver, tx hash
+
+Filter for transfer events > $100,000
+
+Resample/group by hour or day
+
+3. Data Wrangling (with Pandas)
+Merge datasets on timestamp (hour/day)
+
+Feature Engineering:
+
+Normalize whale transfer count or volume
+
+Compute daily/hourly price change % or price volatility
+
+Create flags for "whale spike" periods (e.g., >95th percentile activity)
+
+4. Exploratory Data Analysis (EDA)
+Using Matplotlib / Seaborn / Plotly:
+
+Time series plots of:
+
+Whale activity vs price
+
+Overlay whale transfer volume with price chart
+
+Scatterplots:
+
+Whale volume vs % price change
+
+Histograms/boxplots:
+
+Distribution of price changes after whale spikes
+
+Rolling window analysis:
+
+Rolling correlation between whale activity and price movement
+
+5. Statistical Analysis & Modeling (Optional Extension)
+Lag correlation analysis:
+
+Cross-correlation function (CCF) to check if whale activity leads price moves
+
+Granger causality test:
+
+Check if past whale activity helps predict future price
+
+Anomaly detection:
+
+Identify outliers in whale activity and price behavior
+
+Regression models (optional):
+
+Linear/logistic regression to quantify relationships
+
+6. Insights & Interpretation
+Key findings:
+
+Is there a noticeable pattern?
+
+What time lag (if any) seems most predictive?
+
+Limitations:
+
+Data granularity, whale behavior assumptions, off-chain activity
+
+7. Visualization Dashboard (Optional Extension)
+Tools: Plotly Dash, Streamlit, or Jupyter Notebook presentation
+
+Features:
+
+Token selector
+
+Whale activity overlay on price chart
+
+Interactive time window slider
+
+8. Reporting
+Documentation:
+
+Data sources, methods, assumptions
+
+Notebook or PDF Report:
+
+Problem statement, analysis, visualizations, conclusions
+
+🧰 Tech Stack Summary
+Tool/Library	Purpose
+Coingecko API	Price data (hourly/daily)
+Dune Sim API	Whale transfer activity (> $100K)
+Pandas	Data wrangling, resampling, aggregation
+Matplotlib/Seaborn	Visualizations (static)
+Plotly	Interactive time series (optional)
+Statsmodels	Correlation/Granger causality (optional)
+Jupyter Notebook	Project environment
