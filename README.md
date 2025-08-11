@@ -1,5 +1,7 @@
 Mini Capstone Project
 
+![alt text](image.png)
+
 📌 Project Overview
 
 This project is part of my data science learning journey, focused on analyzing blockchain data. It investigates the relationship between whale transactions (transfers exceeding 100,000) and price movements of selected cryptocurrencies. It aims to determine whether spikes in whale activity correlate with or precede significant market volatility. The analysis combines on-chain data and market price data using Dune, CoinGecko, and Python-based data analytics.
